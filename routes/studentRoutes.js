@@ -53,6 +53,17 @@ router.get('/display', (req, res) => {
 });
 
 
+router.get('/count', (req, res) => {
+    if (students.length === 0) {
+        return res.status(404).json({
+            message: "No students found"
+        });
+    }
+    res.status(200).json({
+        totalStudents: students.length
+    });
+});
+
 router.get('/:id', (req, res) => {
   let id = Number(req.params.id);
   const studentData = students.find(student => student.id === id);
@@ -97,7 +108,6 @@ router.delete('/:id', (req, res) => {
     message: "Student deleted successfully"
   });
 });
-
 
 
 module.exports = router;
